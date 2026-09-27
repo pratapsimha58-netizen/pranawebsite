@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-jetbrains);
-  --font-heading: var(--font-inter);
+  --font-sans: var(--font-unica);
+  --font-mono: var(--font-mono-label);
+  --font-heading: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -39,49 +39,49 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 12px;
-  --radius-2xl: 12px;
-  --radius-3xl: 12px;
-  --radius-4xl: 12px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
+  --radius-2xl: 32px;
+  --radius-3xl: 32px;
+  --radius-4xl: 32px;
 }
 
-/* ClickHouse design system — see DESIGN.md */
+/* Cohere design system — see DESIGN.md */
 :root {
-  --background: #0a0a0a;
-  --foreground: #ffffff;
-  --card: #1a1a1a;
-  --card-foreground: #ffffff;
-  --popover: #1a1a1a;
-  --popover-foreground: #ffffff;
-  --primary: #faff69;
-  --primary-foreground: #0a0a0a;
-  --secondary: #242424;
-  --secondary-foreground: #ffffff;
-  --muted: #121212;
-  --muted-foreground: #888888;
-  --accent: #242424;
-  --accent-foreground: #ffffff;
-  --destructive: #ef4444;
-  --border: #2a2a2a;
-  --input: #2a2a2a;
-  --ring: #faff69;
-  --chart-1: #faff69;
-  --chart-2: #cccccc;
-  --chart-3: #888888;
-  --chart-4: #5a5a5a;
-  --chart-5: #3a3a3a;
-  --radius: 0.5rem;
-  --sidebar: #121212;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #faff69;
-  --sidebar-primary-foreground: #0a0a0a;
-  --sidebar-accent: #242424;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #2a2a2a;
-  --sidebar-ring: #faff69;
+  --background: #ffffff;
+  --foreground: #212121;
+  --card: #ffffff;
+  --card-foreground: #212121;
+  --popover: #ffffff;
+  --popover-foreground: #212121;
+  --primary: #17171c;
+  --primary-foreground: #ffffff;
+  --secondary: #eeece7;
+  --secondary-foreground: #212121;
+  --muted: #eeece7;
+  --muted-foreground: #93939f;
+  --accent: #edfce9;
+  --accent-foreground: #003c33;
+  --destructive: #b30000;
+  --border: #d9d9dd;
+  --input: #e5e7eb;
+  --ring: #4c6ee6;
+  --chart-1: #17171c;
+  --chart-2: #003c33;
+  --chart-3: #1863dc;
+  --chart-4: #ff7759;
+  --chart-5: #93939f;
+  --radius: 1rem;
+  --sidebar: #eeece7;
+  --sidebar-foreground: #212121;
+  --sidebar-primary: #17171c;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #edfce9;
+  --sidebar-accent-foreground: #003c33;
+  --sidebar-border: #d9d9dd;
+  --sidebar-ring: #4c6ee6;
 }
 
 @layer base {
