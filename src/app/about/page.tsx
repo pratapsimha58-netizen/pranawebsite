@@ -29,7 +29,7 @@ export default function AboutPage() {
           { name: "About", path: "/about" },
         ])}
       />
-      <SiteHeader />
+      <SiteHeader variant="solid" />
       <main className="flex-1">
         <section className="border-b border-[#d7d0c4] bg-[color-mix(in_srgb,var(--mist)_50%,transparent)] px-4 py-20 sm:px-6 sm:py-28">
           <div className="mx-auto max-w-3xl">

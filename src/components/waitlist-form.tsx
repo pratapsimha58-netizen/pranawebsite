@@ -13,9 +13,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { coachingGoalOptions, goalLabels } from "@/lib/content";
+import {
+  coachingGoalOptions,
+  goalLabels,
+  type CoachingGoalId,
+} from "@/lib/content";
 import { waitlistSchema } from "@/lib/waitlist-schema";
-
 
 type FieldErrors = Partial<Record<string, string>>;
 
@@ -25,8 +28,12 @@ type Outcome =
   | { kind: "duplicate" }
   | { kind: "error"; message: string };
 
-export function WaitlistForm() {
-  const [primaryGoal, setPrimaryGoal] = useState<string>("");
+export function WaitlistForm({
+  defaultGoal,
+}: {
+  defaultGoal?: CoachingGoalId;
+} = {}) {
+  const [primaryGoal, setPrimaryGoal] = useState<string>(defaultGoal ?? "");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [outcome, setOutcome] = useState<Outcome>({ kind: "idle" });
   const [pending, startTransition] = useTransition();
@@ -67,7 +74,7 @@ export function WaitlistForm() {
         if (res.status === 201 && body.status === "created") {
           setOutcome({ kind: "created", position: body.position ?? 0 });
           form.reset();
-          setPrimaryGoal("");
+          setPrimaryGoal(defaultGoal ?? "");
         } else if (res.status === 200 && body.status === "duplicate") {
           setOutcome({ kind: "duplicate" });
         } else {

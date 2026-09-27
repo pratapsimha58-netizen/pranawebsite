@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,7 @@ import {
   site,
   steps,
 } from "@/lib/content";
+import { goalHrefById } from "@/lib/goals";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
@@ -97,8 +99,22 @@ export function Goals() {
             <span className="text-xs tracking-[0.18em] text-[var(--ink-soft)] uppercase">
               {String(index + 1).padStart(2, "0")}
             </span>
-            <h3 className="mt-3 font-display text-2xl text-[#24302a]">{goal.title}</h3>
+            <h3 className="mt-3 font-display text-2xl text-[#24302a]">
+              <Link
+                href={goalHrefById[goal.id]}
+                className="transition hover:text-[#3f5f4f]"
+              >
+                {goal.title}
+              </Link>
+            </h3>
             <p className="mt-3 text-[15px] leading-relaxed text-[var(--ink-soft)]">{goal.body}</p>
+            <Link
+              href={goalHrefById[goal.id]}
+              className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#3f5f4f] underline-offset-4 hover:underline"
+            >
+              Explore this path
+              <ArrowRight className="size-3.5" />
+            </Link>
           </li>
         ))}
       </ol>
