@@ -2,12 +2,6 @@ import { ArrowRight } from "lucide-react";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { Button } from "@/components/ui/button";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import {
   coachingGoals,
   faqs,
   formatInr,
@@ -30,8 +24,9 @@ export function Hero() {
             {site.tagline}
           </h1>
           <p className="animate-fade-up-delay-2 mt-5 max-w-lg text-base leading-relaxed text-[#f7f3ed]/80 sm:text-lg">
-            Coaching for fitness, habits, resilience, confidence, and the clarity to take your
-            next step — paced to a human life.
+            Coaching with Pratap, ICF-credentialed coach in Bengaluru and online — for
+            fitness, habits, resilience, confidence, and the clarity to take your next
+            step, paced to a human life.
           </p>
           <div className="animate-fade-up-delay-3 mt-8 flex flex-col gap-3 sm:flex-row">
             <Button
@@ -238,18 +233,21 @@ export function Faq() {
       title="Questions people ask before beginning"
       className="bg-[color-mix(in_srgb,var(--mist)_55%,transparent)]"
     >
-      <Accordion type="single" collapsible className="max-w-3xl">
-        {faqs.map((item, index) => (
-          <AccordionItem key={item.q} value={`item-${index}`} className="border-[#d7d0c4]">
-            <AccordionTrigger className="text-left font-display text-lg text-[#24302a] hover:no-underline sm:text-xl">
-              {item.q}
-            </AccordionTrigger>
-            <AccordionContent className="text-[15px] leading-relaxed text-[var(--ink-soft)]">
-              {item.a}
-            </AccordionContent>
-          </AccordionItem>
+      <div className="max-w-3xl divide-y divide-[#d7d0c4] border-y border-[#d7d0c4]">
+        {faqs.map((item) => (
+          <details key={item.q} className="group py-4">
+            <summary className="cursor-pointer list-none font-display text-lg text-[#24302a] marker:content-none sm:text-xl [&::-webkit-details-marker]:hidden">
+              <span className="flex items-start justify-between gap-4">
+                {item.q}
+                <span className="mt-1 text-sm text-[var(--ink-soft)] transition group-open:rotate-45">
+                  +
+                </span>
+              </span>
+            </summary>
+            <p className="mt-3 text-[15px] leading-relaxed text-[var(--ink-soft)]">{item.a}</p>
+          </details>
         ))}
-      </Accordion>
+      </div>
     </SectionShell>
   );
 }

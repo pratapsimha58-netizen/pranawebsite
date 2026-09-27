@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { aboutHome, credentials, testimonials } from "@/lib/about";
 import { site } from "@/lib/site";

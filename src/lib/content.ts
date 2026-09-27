@@ -135,23 +135,39 @@ export const steps = [
 export const faqs = [
   {
     q: "Is this therapy?",
-    a: "No. This is coaching for lifestyle, habits, confidence, and clarity. If clinical support is what you need, we will say so kindly and point you toward it.",
+    a: "No. This is coaching for lifestyle, habits, confidence, and clarity — not clinical treatment. If therapy or another form of care is what you need, we will say so kindly and help you think about next steps.",
   },
   {
     q: "How online or in-person is this?",
-    a: "Sessions are on Google Meet by default. In-person is possible in select cities when both of us can meet without strain.",
+    a: "Most sessions are online on Google Meet, so you can work with Pratap from anywhere in India or abroad. {{TODO: owner review — confirm whether in-person sessions in Bengaluru are offered, and under what conditions}}.",
   },
   {
     q: "I have tried programs before and quit. Will this be different?",
-    a: "We design for ordinary weeks, not perfect ones. The plan bends when life does — that is the point.",
+    a: "We design for ordinary weeks, not perfect ones. The plan bends when life does — that is the point. You will not be asked to white-knuckle a streak that collapses the first busy Friday.",
   },
   {
     q: "Who is the First Client path for?",
-    a: "People who already have a skill or story to offer and want clarity, courage, and structure to invite their first paying client.",
+    a: "People who already have a skill or story to offer and want clarity, courage, and structure to invite their first paying client. It is not a full coach-training program; it is support to make the first paid conversation real.",
   },
   {
     q: "What happens after I join the waitlist?",
-    a: "You get a short personal note within 48 hours, then a link to book a discovery call when a seat opens.",
+    a: "You get a short personal note within 48 hours, then a link to book a discovery call when a seat opens. There is no drip sequence and no pressure to buy on the spot.",
+  },
+  {
+    q: "Who is the coach behind Prana Way?",
+    a: "Pratap is an ICF-credentialed coach and NLP Practitioner based in Bengaluru. He brings 10+ years in people development and five years leading CX at Dunzo, where he helped scale a team from 10 to about 1,000 people with a focus on quality and training.",
+  },
+  {
+    q: "What does a coaching session look like?",
+    a: "A typical session is a focused conversation on Google Meet: we check what is true this week, practice or plan one clear step, and leave with something small enough to keep. {{TODO: owner review — add any fixed session length if you want it public}}.",
+  },
+  {
+    q: "Do you offer refunds?",
+    a: "{{TODO: owner review — state the refund policy clearly in one or two sentences}}.",
+  },
+  {
+    q: "Can I pay in instalments?",
+    a: "{{TODO: owner review — state whether instalments are available and for which packages}}.",
   },
 ];
 
