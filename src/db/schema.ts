@@ -7,16 +7,10 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
+import { coachingGoalOptions, type CoachingGoalId } from "@/lib/content";
 
-export const coachingGoalOptions = [
-  "fitness",
-  "habits",
-  "resilience",
-  "confidence",
-  "clarity",
-] as const;
-
-export type CoachingGoalOption = (typeof coachingGoalOptions)[number];
+export { coachingGoalOptions };
+export type CoachingGoalOption = CoachingGoalId;
 
 export const waitlist = pgTable("waitlist", {
   id: serial("id").primaryKey(),

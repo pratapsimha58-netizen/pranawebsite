@@ -34,7 +34,15 @@ export const coachingGoals = [
   },
 ] as const;
 
-export type CoachingGoalId = (typeof coachingGoals)[number]["id"];
+export const coachingGoalOptions = [
+  "fitness",
+  "habits",
+  "resilience",
+  "confidence",
+  "clarity",
+] as const;
+
+export type CoachingGoalId = (typeof coachingGoalOptions)[number];
 
 export const goalLabels: Record<CoachingGoalId, string> = {
   fitness: "Get back to fitness",

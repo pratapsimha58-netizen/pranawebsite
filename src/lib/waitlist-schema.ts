@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { coachingGoalOptions } from "@/db/schema";
+import { coachingGoalOptions } from "@/lib/content";
 
 const optionalTrimmed = (max: number) =>
   z

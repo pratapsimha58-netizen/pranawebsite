@@ -13,9 +13,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { coachingGoalOptions } from "@/db/schema";
-import { goalLabels } from "@/lib/content";
+import { coachingGoalOptions, goalLabels } from "@/lib/content";
 import { waitlistSchema } from "@/lib/waitlist-schema";
+
 
 type FieldErrors = Partial<Record<string, string>>;
 

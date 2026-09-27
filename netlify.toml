@@ -2,5 +2,12 @@
   command = "npm run build"
   publish = ".next"
 
+  # Next.js inlines server env into build artifacts (.nft.json, required-server-files).
+  # Those secrets are runtime-only and never shipped to the browser; omit them from
+  # Netlify's post-build secrets scan so deploys are not blocked.
+  [build.environment]
+    SECRETS_SCAN_OMIT_KEYS = "DATABASE_URL,DATABASE_URL_UNPOOLED,ADMIN_TOKEN,NEON_BRANCH,NEON_API_KEY"
+    SECRETS_SCAN_OMIT_PATHS = ".netlify/.next,.netlify/functions-internal"
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
