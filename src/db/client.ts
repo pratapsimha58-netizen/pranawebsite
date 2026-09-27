@@ -4,7 +4,7 @@ import * as schema from "./schema";
 
 export type Database = NeonHttpDatabase<typeof schema>;
 
-const globalForDb = globalThis as unknown as { __shiftreadyDb?: Database };
+const globalForDb = globalThis as unknown as { __pranaDb?: Database };
 
 export function getDatabaseUrl(): string | undefined {
   const url = process.env.DATABASE_URL?.trim();
@@ -22,8 +22,8 @@ export function isDatabaseConfigured(): boolean {
 export function getDb(): Database | null {
   const url = getDatabaseUrl();
   if (!url) return null;
-  if (!globalForDb.__shiftreadyDb) {
-    globalForDb.__shiftreadyDb = drizzle(neon(url), { schema });
+  if (!globalForDb.__pranaDb) {
+    globalForDb.__pranaDb = drizzle(neon(url), { schema });
   }
-  return globalForDb.__shiftreadyDb;
+  return globalForDb.__pranaDb;
 }

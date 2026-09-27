@@ -35,7 +35,7 @@ export default async function AdminWaitlistPage({
 
   if (!isAdminAuthorised(token)) {
     return (
-      <Shell>
+      <Shell token={token}>
         <Alert variant="destructive">
           <AlertTriangle />
           <AlertTitle>Admin token required</AlertTitle>
@@ -68,7 +68,7 @@ export default async function AdminWaitlistPage({
   }, {});
 
   return (
-    <Shell>
+    <Shell token={token}>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-medium text-primary">Admin</p>
@@ -179,12 +179,27 @@ export default async function AdminWaitlistPage({
   );
 }
 
-function Shell({ children }: { children: React.ReactNode }) {
+function Shell({
+  children,
+  token,
+}: {
+  children: React.ReactNode;
+  token?: string;
+}) {
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6">
-      <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
-        &larr; Back to {site.name}
-      </Link>
+      <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+        <Link href="/" className="hover:text-foreground">
+          &larr; {site.name}
+        </Link>
+        <span className="text-foreground">Waitlist</span>
+        <Link
+          href={token ? `/admin/webinars?token=${encodeURIComponent(token)}` : "/admin/webinars"}
+          className="hover:text-foreground"
+        >
+          Webinars
+        </Link>
+      </div>
       <div className="mt-6">{children}</div>
     </main>
   );
