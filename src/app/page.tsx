@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/components/site-header";
+import { AboutCoach, Testimonials } from "@/components/about";
 import {
   Faq,
   Goals,
@@ -8,16 +9,27 @@ import {
   SiteFooter,
 } from "@/components/sections";
 import { WaitlistForm } from "@/components/waitlist-form";
+import { JsonLd } from "@/components/json-ld";
+import { faqs } from "@/lib/content";
+import { buildFaqPage, buildServiceOffers } from "@/lib/seo/schema";
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [...buildServiceOffers(), buildFaqPage(faqs)],
+        }}
+      />
       <SiteHeader />
       <main className="flex-1">
         <Hero />
         <Goals />
         <Packages />
         <HowItWorks />
+        <AboutCoach />
+        <Testimonials />
         <Faq />
         <section id="waitlist" className="scroll-mt-24 px-4 py-20 sm:px-6 sm:py-28">
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
