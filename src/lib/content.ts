@@ -1,9 +1,11 @@
+import { site as siteConfig } from "@/lib/site";
+
+/** Re-export so existing imports of `site` from content keep working. */
 export const site = {
-  name: "Prana Way",
-  tagline: "Come back to yourself, gently.",
-  description:
-    "One-to-one coaching for people who want fitness, better habits, resilience, confidence, and the clarity to take their next step — without hustle culture.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:4821",
+  name: siteConfig.name,
+  tagline: siteConfig.tagline,
+  description: siteConfig.description,
+  url: siteConfig.url,
 };
 
 export const coachingGoals = [
@@ -157,25 +159,25 @@ export const faqs = [
 export const heroSlides = [
   {
     id: "dawn",
-    alt: "Soft morning light through trees",
+    alt: "Mountain ridgeline at dawn with soft peach and blue light, suggesting a gentle new beginning",
     src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
     caption: "Begin again in soft light",
   },
   {
     id: "breath",
-    alt: "Calm shoreline at golden hour",
+    alt: "Calm ocean shoreline at golden hour with quiet waves and warm sky",
     src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=80",
     caption: "Let the rush fall away",
   },
   {
     id: "path",
-    alt: "Quiet forest path with gentle mist",
+    alt: "Quiet forest path with gentle mist filtering through tall trees",
     src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2400&q=80",
     caption: "Walk back toward yourself",
   },
   {
     id: "warmth",
-    alt: "Warm sunlight on open fields",
+    alt: "Open fields under warm sunlight with soft rolling hills in the distance",
     src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=2400&q=80",
     caption: "Steady, human, unhurried",
   },

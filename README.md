@@ -22,6 +22,7 @@ Without `DATABASE_URL`, the waitlist falls back to in-memory storage (fine for U
 
 Set `ADMIN_TOKEN` in production. Generation runs on this app (not a Cursor Cloud backend).
 
+## Cloud Agent
 
 ```bash
 ./scripts/cloud-agent-install.sh

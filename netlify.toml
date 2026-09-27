@@ -11,3 +11,9 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "https://www.thepranaway.com/*"
+  to = "https://thepranaway.com/:splat"
+  status = 301
+  force = true
