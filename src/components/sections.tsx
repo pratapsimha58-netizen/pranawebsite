@@ -119,69 +119,88 @@ export function Packages() {
       description="Pay once for a season of support. No subscriptions. No hustle scoreboard."
       className="bg-[color-mix(in_srgb,var(--mist)_70%,transparent)]"
     >
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-3 md:items-stretch">
         {packages.map((pkg) => (
           <article
             key={pkg.id}
             className={cn(
-              "flex flex-col rounded-2xl border p-7 sm:p-8",
+              "relative flex h-full flex-col border p-6 sm:p-7",
               pkg.highlight
-                ? "border-[#3f5f4f]/35 bg-[#3f5f4f] text-[#f7f3ed]"
-                : "border-[#d7d0c4] bg-[#faf7f2]/80 text-[#24302a]",
+                ? "border-[#3f5f4f] bg-[#3f5f4f] text-[#f7f3ed] shadow-[0_18px_40px_-28px_rgba(36,48,42,0.55)]"
+                : "border-[#cfc7bb] bg-[#faf7f2] text-[#24302a]",
             )}
           >
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h3 className="font-display text-2xl sm:text-3xl">{pkg.name}</h3>
-              {pkg.highlight ? (
-                <span className="text-xs tracking-[0.14em] text-[#f7f3ed]/75 uppercase">
-                  Most chosen
-                </span>
-              ) : null}
-            </div>
+            {pkg.highlight ? (
+              <span className="absolute -top-3 left-6 bg-[#24302a] px-2.5 py-1 text-[10px] font-semibold tracking-[0.14em] text-[#f7f3ed] uppercase">
+                Most chosen
+              </span>
+            ) : null}
+
             <p
               className={cn(
-                "mt-3 text-[15px] leading-relaxed",
+                "text-xs font-semibold tracking-[0.16em] uppercase",
+                pkg.highlight ? "text-[#f7f3ed]/70" : "text-[var(--ink-soft)]",
+              )}
+            >
+              {pkg.duration}
+            </p>
+            <h3 className="mt-3 font-display text-2xl leading-tight sm:text-[1.7rem]">
+              {pkg.name}
+            </h3>
+            <p
+              className={cn(
+                "mt-3 min-h-[3.2rem] text-sm leading-relaxed",
                 pkg.highlight ? "text-[#f7f3ed]/80" : "text-[var(--ink-soft)]",
               )}
             >
               {pkg.summary}
             </p>
-            <p className="mt-6 font-display text-3xl">
-              {formatInr(pkg.price)}
-              <span
+
+            <div className="mt-6 border-y border-current/15 py-5">
+              <p className="font-display text-4xl tracking-tight">
+                {formatInr(pkg.price)}
+              </p>
+              <p
                 className={cn(
-                  "ml-2 text-sm font-sans",
-                  pkg.highlight ? "text-[#f7f3ed]/70" : "text-[var(--ink-soft)]",
+                  "mt-1 text-xs",
+                  pkg.highlight ? "text-[#f7f3ed]/65" : "text-[var(--ink-soft)]",
                 )}
               >
-                · {pkg.duration}
-              </span>
-            </p>
-            <ul className="mt-6 flex-1 space-y-2.5 text-[15px]">
+                one-time · includes live sessions
+              </p>
+            </div>
+
+            <ul className="mt-6 flex-1 space-y-3 text-sm">
               {pkg.includes.map((line) => (
                 <li key={line} className="flex gap-2.5">
                   <span
+                    aria-hidden
                     className={cn(
-                      "mt-2 size-1.5 shrink-0 rounded-full",
-                      pkg.highlight ? "bg-[#f7f3ed]/80" : "bg-[#3f5f4f]",
+                      "mt-0.5 flex size-4 shrink-0 items-center justify-center text-[11px] font-bold",
+                      pkg.highlight
+                        ? "bg-[#f7f3ed]/20 text-[#f7f3ed]"
+                        : "bg-[#e7efe9] text-[#3f5f4f]",
                     )}
-                  />
+                  >
+                    ✓
+                  </span>
                   <span className={pkg.highlight ? "text-[#f7f3ed]/90" : "text-[#24302a]/85"}>
                     {line}
                   </span>
                 </li>
               ))}
             </ul>
+
             <Button
               asChild
               className={cn(
-                "mt-8 h-11 w-full rounded-md text-sm font-medium",
+                "mt-8 h-11 w-full rounded-none text-sm font-semibold",
                 pkg.highlight
                   ? "bg-[#f7f3ed] text-[#24302a] hover:bg-[#ebe4d8]"
                   : "bg-[#3f5f4f] text-[#f7f3ed] hover:bg-[#345043]",
               )}
             >
-              <a href="#waitlist">Start with this path</a>
+              <a href="#waitlist">Choose {pkg.name}</a>
             </Button>
           </article>
         ))}

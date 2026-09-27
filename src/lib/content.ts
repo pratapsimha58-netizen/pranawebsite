@@ -67,7 +67,7 @@ export const packages: Package[] = [
   {
     id: "single-focus",
     name: "Single Focus",
-    price: 4999,
+    price: 30000,
     duration: "3 weeks",
     summary: "One goal. Clear weekly rhythm. Gentle accountability.",
     goals: ["fitness", "habits", "resilience", "confidence", "clarity"],
@@ -81,7 +81,7 @@ export const packages: Package[] = [
   {
     id: "steady-path",
     name: "Steady Path",
-    price: 9999,
+    price: 50000,
     duration: "6 weeks",
     summary: "The most chosen path — two or three goals woven into one habit of life.",
     highlight: true,
@@ -97,7 +97,7 @@ export const packages: Package[] = [
   {
     id: "first-client",
     name: "First Client",
-    price: 7999,
+    price: 30000,
     duration: "4 weeks",
     summary: "For people ready to offer their gift and book their first paid client.",
     goals: ["clarity", "confidence"],
@@ -107,21 +107,6 @@ export const packages: Package[] = [
       "Script and soft-invite practice for outreach",
       "Session structure for your first client call",
       "Celebration and next-90-days sketch",
-    ],
-  },
-  {
-    id: "full-return",
-    name: "Full Return",
-    price: 17999,
-    duration: "12 weeks",
-    summary: "Fitness, habits, resilience, confidence, and clarity — held as one season of change.",
-    goals: ["fitness", "habits", "resilience", "confidence", "clarity"],
-    includes: [
-      "Twenty-four sessions across twelve weeks",
-      "All five goal tracks, paced to your life",
-      "Monthly body-and-mind review",
-      "Optional first-client sprint in weeks 9–12",
-      "Closing letter: who you are becoming",
     ],
   },
 ];
