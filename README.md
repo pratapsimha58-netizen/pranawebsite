@@ -22,6 +22,12 @@ Without `DATABASE_URL`, the waitlist falls back to in-memory storage (fine for U
 
 Set `ADMIN_TOKEN` in production. Generation runs on this app (not a Cursor Cloud backend).
 
+## SEO / GEO
+
+See [`SEO_REPORT.md`](./SEO_REPORT.md) for the phased search and AI-citation work, owner TODOs, and off-site checklist.
+
+Key public routes: `/about`, `/journal`, `/fitness-habits-coaching`, `/break-bad-habits`, `/resilience-coaching`, `/confidence-coaching`, `/first-coaching-client`, `/llms.txt`, `/sitemap.xml`.
+
 ## Cloud Agent
 
 ```bash

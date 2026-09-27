@@ -13,12 +13,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  coachingGoalOptions,
-  goalLabels,
-  type CoachingGoalId,
-} from "@/lib/content";
+import { coachingGoalOptions, goalLabels, type CoachingGoalId } from "@/lib/content";
 import { waitlistSchema } from "@/lib/waitlist-schema";
+import { trackWaitlistSubmit } from "@/lib/analytics";
 
 type FieldErrors = Partial<Record<string, string>>;
 
@@ -72,6 +69,7 @@ export function WaitlistForm({
           error?: string;
         };
         if (res.status === 201 && body.status === "created") {
+          trackWaitlistSubmit(parsed.data.primaryGoal);
           setOutcome({ kind: "created", position: body.position ?? 0 });
           form.reset();
           setPrimaryGoal(defaultGoal ?? "");

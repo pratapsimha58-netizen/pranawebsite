@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree, Newsreader } from "next/font/google";
 import { JsonLd } from "@/components/json-ld";
+import { Analytics } from "@/components/analytics";
 import { site } from "@/lib/site";
 import { buildOrganizationGraph } from "@/lib/seo/schema";
 import "./globals.css";
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <JsonLd data={buildOrganizationGraph()} />
+        <Analytics />
         {children}
       </body>
     </html>
