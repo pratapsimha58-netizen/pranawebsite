@@ -15,7 +15,13 @@ npm run dev                  # http://localhost:4821
 
 Without `DATABASE_URL`, the waitlist falls back to in-memory storage (fine for UI preview).
 
-## Cloud Agent
+## Admin
+
+- Waitlist: `/admin/waitlist`
+- Webinar studio: `/admin/webinars` — describe a session in plain language; a matching Prana Way page is published at `/webinars/[slug]`
+
+Set `ADMIN_TOKEN` in production. Generation runs on this app (not a Cursor Cloud backend).
+
 
 ```bash
 ./scripts/cloud-agent-install.sh
