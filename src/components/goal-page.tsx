@@ -185,6 +185,17 @@ export function GoalPageView({ goal }: { goal: GoalPageContent }) {
                   ))}
                 </ul>
               </div>
+            ) : goal.relatedArticles.length > 0 ? (
+              <div className="mt-10">
+                <h3 className="font-display text-xl text-[#24302a]">Related reading</h3>
+                <p className="mt-2 text-sm text-[var(--ink-soft)]">
+                  Journal drafts linked to this path will appear here when published.{" "}
+                  <Link href="/journal" className="text-[#3f5f4f] underline-offset-4 hover:underline">
+                    Visit the journal
+                  </Link>
+                  .
+                </p>
+              </div>
             ) : null}
           </div>
         </section>

@@ -7,10 +7,10 @@ import {
   faqs,
   formatInr,
   packages,
-  site,
   steps,
 } from "@/lib/content";
 import { goalHrefById } from "@/lib/goals";
+import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
@@ -269,15 +269,63 @@ export function Faq() {
 }
 
 export function SiteFooter() {
+  const goalLinks = [
+    { href: "/fitness-habits-coaching", label: "Fitness habits coaching" },
+    { href: "/break-bad-habits", label: "Break bad habits" },
+    { href: "/resilience-coaching", label: "Resilience coaching" },
+    { href: "/confidence-coaching", label: "Confidence coaching" },
+    { href: "/first-coaching-client", label: "First coaching client" },
+  ];
+  const exploreLinks = [
+    { href: "/about", label: "About Pratap" },
+    { href: "/journal", label: "Journal" },
+    { href: "/#packages", label: "Packages" },
+    { href: "/#waitlist", label: "Join the waitlist" },
+  ];
+
   return (
     <footer className="border-t border-[#d7d0c4] py-14">
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 text-sm text-[var(--ink-soft)] sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <p>
-          <span className="font-display text-lg text-[#24302a]">{site.name}</span>
-          {" · "}
-          Coaching that is soothing to the eyes and the heart.
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
+          <div>
+            <p className="font-display text-xl text-[#24302a]">{site.name}</p>
+            <p className="mt-2 max-w-sm text-sm leading-relaxed text-[var(--ink-soft)]">
+              {site.tagline} One-to-one coaching in {site.city} and online with{" "}
+              {site.person.name}.
+            </p>
+          </div>
+          <div>
+            <p className="text-xs tracking-[0.14em] text-[var(--ink-soft)] uppercase">
+              Coaching paths
+            </p>
+            <ul className="mt-3 space-y-2 text-sm text-[var(--ink-soft)]">
+              {goalLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="transition hover:text-[#24302a]">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs tracking-[0.14em] text-[var(--ink-soft)] uppercase">
+              Explore
+            </p>
+            <ul className="mt-3 space-y-2 text-sm text-[var(--ink-soft)]">
+              {exploreLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="transition hover:text-[#24302a]">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <p className="mt-10 text-xs text-[var(--ink-soft)]">
+          Waitlist open. Discovery calls as seats free up.
         </p>
-        <p>Waitlist open. Discovery calls as seats free up.</p>
       </div>
     </footer>
   );
