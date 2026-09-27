@@ -34,6 +34,9 @@ yarn-error.log*
 .env*
 !.env.example
 
+# Neon local context (project/branch linkage; may contain env pull state)
+.neon
+
 # vercel
 .vercel
 
