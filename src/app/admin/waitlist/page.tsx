@@ -151,10 +151,9 @@ export default async function AdminWaitlistPage({
                 <TableHead>When</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Email</TableHead>
-                <TableHead>Current role</TableHead>
-                <TableHead>Exp.</TableHead>
-                <TableHead>Target role</TableHead>
+                <TableHead>Primary goal</TableHead>
                 <TableHead>City</TableHead>
+                <TableHead>Phone</TableHead>
                 <TableHead>Source</TableHead>
               </TableRow>
             </TableHeader>
@@ -166,10 +165,9 @@ export default async function AdminWaitlistPage({
                   </TableCell>
                   <TableCell className="font-medium">{row.name}</TableCell>
                   <TableCell>{row.email}</TableCell>
-                  <TableCell>{row.currentRole}</TableCell>
-                  <TableCell>{row.yearsExperience}</TableCell>
-                  <TableCell className="text-muted-foreground">{row.targetRole ?? "-"}</TableCell>
+                  <TableCell>{row.primaryGoal}</TableCell>
                   <TableCell className="text-muted-foreground">{row.city ?? "-"}</TableCell>
+                  <TableCell className="text-muted-foreground">{row.phone ?? "-"}</TableCell>
                   <TableCell className="text-muted-foreground">{row.source ?? "direct"}</TableCell>
                 </TableRow>
               ))}

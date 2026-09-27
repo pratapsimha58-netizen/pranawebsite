@@ -1,12 +1,20 @@
 import { pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
 
+export const coachingGoalOptions = [
+  "fitness",
+  "habits",
+  "resilience",
+  "confidence",
+  "clarity",
+] as const;
+
+export type CoachingGoalOption = (typeof coachingGoalOptions)[number];
+
 export const waitlist = pgTable("waitlist", {
   id: serial("id").primaryKey(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   name: varchar("name", { length: 120 }).notNull(),
-  currentRole: varchar("current_role", { length: 120 }).notNull(),
-  yearsExperience: varchar("years_experience", { length: 16 }).notNull(),
-  targetRole: varchar("target_role", { length: 120 }),
+  primaryGoal: varchar("primary_goal", { length: 32 }).notNull(),
   city: varchar("city", { length: 80 }),
   phone: varchar("phone", { length: 20 }),
   source: varchar("source", { length: 80 }),
@@ -17,6 +25,3 @@ export const waitlist = pgTable("waitlist", {
 
 export type WaitlistEntry = typeof waitlist.$inferSelect;
 export type NewWaitlistEntry = typeof waitlist.$inferInsert;
-
-export const yearsExperienceOptions = ["0-2", "2-4", "4-8", "8+"] as const;
-export type YearsExperience = (typeof yearsExperienceOptions)[number];

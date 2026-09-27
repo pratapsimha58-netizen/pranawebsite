@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { yearsExperienceOptions } from "@/db/schema";
+import { coachingGoalOptions } from "@/db/schema";
 
 const optionalTrimmed = (max: number) =>
   z
@@ -17,15 +17,9 @@ export const waitlistSchema = z.object({
     .email("Enter a valid email address")
     .max(320),
   name: z.string({ message: "Enter your name" }).trim().min(2, "Enter your name").max(120),
-  currentRole: z
-    .string({ message: "Enter your current role" })
-    .trim()
-    .min(2, "Enter your current role")
-    .max(120),
-  yearsExperience: z.enum(yearsExperienceOptions, {
-    message: "Pick your years of experience",
+  primaryGoal: z.enum(coachingGoalOptions, {
+    message: "Choose the goal that calls you most",
   }),
-  targetRole: optionalTrimmed(120),
   city: optionalTrimmed(80),
   phone: optionalTrimmed(20),
   source: optionalTrimmed(80),

@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-jetbrains);
-  --font-heading: var(--font-inter);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-body);
+  --font-heading: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -39,49 +39,52 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 12px;
-  --radius-2xl: 12px;
-  --radius-3xl: 12px;
-  --radius-4xl: 12px;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 1.75rem;
+  --radius-4xl: 2rem;
 }
 
-/* ClickHouse design system — see DESIGN.md */
+/* Prana Way — warm stone, sage mist, soft spruce. Soothing, human, unhurried. */
 :root {
-  --background: #0a0a0a;
-  --foreground: #ffffff;
-  --card: #1a1a1a;
-  --card-foreground: #ffffff;
-  --popover: #1a1a1a;
-  --popover-foreground: #ffffff;
-  --primary: #faff69;
-  --primary-foreground: #0a0a0a;
-  --secondary: #242424;
-  --secondary-foreground: #ffffff;
-  --muted: #121212;
-  --muted-foreground: #888888;
-  --accent: #242424;
-  --accent-foreground: #ffffff;
-  --destructive: #ef4444;
-  --border: #2a2a2a;
-  --input: #2a2a2a;
-  --ring: #faff69;
-  --chart-1: #faff69;
-  --chart-2: #cccccc;
-  --chart-3: #888888;
-  --chart-4: #5a5a5a;
-  --chart-5: #3a3a3a;
-  --radius: 0.5rem;
-  --sidebar: #121212;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #faff69;
-  --sidebar-primary-foreground: #0a0a0a;
-  --sidebar-accent: #242424;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #2a2a2a;
-  --sidebar-ring: #faff69;
+  --background: #f2eee8;
+  --foreground: #24302a;
+  --card: #faf7f2;
+  --card-foreground: #24302a;
+  --popover: #faf7f2;
+  --popover-foreground: #24302a;
+  --primary: #3f5f4f;
+  --primary-foreground: #f7f3ed;
+  --secondary: #e7efe9;
+  --secondary-foreground: #24302a;
+  --muted: #e8e2d8;
+  --muted-foreground: #5d6b63;
+  --accent: #d8e6e0;
+  --accent-foreground: #24302a;
+  --destructive: #b45448;
+  --border: #d7d0c4;
+  --input: #d7d0c4;
+  --ring: #3f5f4f;
+  --chart-1: #3f5f4f;
+  --chart-2: #6b9a96;
+  --chart-3: #c4a574;
+  --chart-4: #8a9e8f;
+  --chart-5: #5d6b63;
+  --radius: 0.75rem;
+  --sidebar: #faf7f2;
+  --sidebar-foreground: #24302a;
+  --sidebar-primary: #3f5f4f;
+  --sidebar-primary-foreground: #f7f3ed;
+  --sidebar-accent: #e7efe9;
+  --sidebar-accent-foreground: #24302a;
+  --sidebar-border: #d7d0c4;
+  --sidebar-ring: #3f5f4f;
+  --mist: #e4ede8;
+  --sand: #f2eee8;
+  --ink-soft: #5d6b63;
 }
 
 @layer base {
@@ -90,8 +93,94 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(ellipse 120% 80% at 10% -10%, #e4ede8 0%, transparent 55%),
+      radial-gradient(ellipse 90% 60% at 100% 0%, #efe6d8 0%, transparent 50%),
+      linear-gradient(180deg, #f2eee8 0%, #ebe6de 100%);
+    background-attachment: fixed;
   }
   html {
-    @apply font-sans;
+    @apply font-sans scroll-smooth;
+  }
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display), ui-serif, Georgia, serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  @keyframes prana-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes prana-kenburns {
+    from {
+      transform: scale(1.04) translate3d(0, 0, 0);
+    }
+    to {
+      transform: scale(1.12) translate3d(-1.5%, -1%, 0);
+    }
+  }
+
+  @keyframes prana-breathe {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-up {
+    animation: prana-fade-up 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-fade-up-delay-1 {
+    animation: prana-fade-up 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  }
+
+  .animate-fade-up-delay-2 {
+    animation: prana-fade-up 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+
+  .animate-fade-up-delay-3 {
+    animation: prana-fade-up 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+  }
+
+  .animate-kenburns {
+    animation: prana-kenburns 14s ease-in-out alternate infinite;
+  }
+
+  .animate-kenburns-paused {
+    animation-play-state: paused;
+  }
+
+  .animate-breathe {
+    animation: prana-breathe 3.6s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up,
+    .animate-fade-up-delay-1,
+    .animate-fade-up-delay-2,
+    .animate-fade-up-delay-3,
+    .animate-kenburns,
+    .animate-breathe {
+      animation: none !important;
+    }
   }
 }

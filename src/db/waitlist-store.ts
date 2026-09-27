@@ -38,7 +38,6 @@ class NeonWaitlistStore implements WaitlistStore {
       .returning();
 
     if (!entry) {
-      // Lost a race with a concurrent insert of the same email.
       const raced = await this.db.query.waitlist.findFirst({
         where: eq(waitlist.email, email),
       });
@@ -57,10 +56,6 @@ class NeonWaitlistStore implements WaitlistStore {
   }
 }
 
-/**
- * Used when DATABASE_URL is absent so the site runs without credentials.
- * Persisted on globalThis so Next.js hot reloads do not wipe it mid-session.
- */
 class MemoryWaitlistStore implements WaitlistStore {
   readonly mode = "memory" as const;
   private readonly rows: WaitlistEntry[];
@@ -79,9 +74,7 @@ class MemoryWaitlistStore implements WaitlistStore {
       id: this.nextId++,
       email,
       name: input.name,
-      currentRole: input.currentRole,
-      yearsExperience: input.yearsExperience,
-      targetRole: input.targetRole ?? null,
+      primaryGoal: input.primaryGoal,
       city: input.city ?? null,
       phone: input.phone ?? null,
       source: input.source ?? null,
@@ -103,14 +96,14 @@ class MemoryWaitlistStore implements WaitlistStore {
 }
 
 const globalForStore = globalThis as unknown as {
-  __shiftreadyMemoryRows?: WaitlistEntry[];
+  __pranaMemoryRows?: WaitlistEntry[];
 };
 
 export function getWaitlistStore(): WaitlistStore {
   const db = getDb();
   if (db) return new NeonWaitlistStore(db);
-  if (!globalForStore.__shiftreadyMemoryRows) {
-    globalForStore.__shiftreadyMemoryRows = [];
+  if (!globalForStore.__pranaMemoryRows) {
+    globalForStore.__pranaMemoryRows = [];
   }
-  return new MemoryWaitlistStore(globalForStore.__shiftreadyMemoryRows);
+  return new MemoryWaitlistStore(globalForStore.__pranaMemoryRows);
 }

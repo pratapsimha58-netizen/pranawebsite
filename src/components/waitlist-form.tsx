@@ -13,7 +13,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { yearsExperienceOptions } from "@/db/schema";
+import { coachingGoalOptions } from "@/db/schema";
+import { goalLabels } from "@/lib/content";
 import { waitlistSchema } from "@/lib/waitlist-schema";
 
 type FieldErrors = Partial<Record<string, string>>;
@@ -24,15 +25,8 @@ type Outcome =
   | { kind: "duplicate" }
   | { kind: "error"; message: string };
 
-const experienceLabels: Record<(typeof yearsExperienceOptions)[number], string> = {
-  "0-2": "0-2 years",
-  "2-4": "2-4 years",
-  "4-8": "4-8 years",
-  "8+": "8+ years",
-};
-
 export function WaitlistForm() {
-  const [yearsExperience, setYearsExperience] = useState<string>("");
+  const [primaryGoal, setPrimaryGoal] = useState<string>("");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [outcome, setOutcome] = useState<Outcome>({ kind: "idle" });
   const [pending, startTransition] = useTransition();
@@ -43,7 +37,7 @@ export function WaitlistForm() {
     const raw = Object.fromEntries(new FormData(form).entries());
     const parsed = waitlistSchema.safeParse({
       ...raw,
-      yearsExperience,
+      primaryGoal,
       source: readSourceFromUrl(),
     });
 
@@ -73,7 +67,7 @@ export function WaitlistForm() {
         if (res.status === 201 && body.status === "created") {
           setOutcome({ kind: "created", position: body.position ?? 0 });
           form.reset();
-          setYearsExperience("");
+          setPrimaryGoal("");
         } else if (res.status === 200 && body.status === "duplicate") {
           setOutcome({ kind: "duplicate" });
         } else {
@@ -93,12 +87,14 @@ export function WaitlistForm() {
 
   if (outcome.kind === "created") {
     return (
-      <Alert className="border-primary/40">
+      <Alert className="border-[#3f5f4f]/30 bg-[#e7efe9]">
         <CheckCircle2 />
-        <AlertTitle>You are on the list{outcome.position ? ` (#${outcome.position})` : ""}.</AlertTitle>
+        <AlertTitle>
+          You are on the list{outcome.position ? ` (#${outcome.position})` : ""}.
+        </AlertTitle>
         <AlertDescription>
-          We will message you on email within 24 hours with how to send your resume for
-          the free ATS score. Founding-customer pricing goes to the first 10 paid orders.
+          Expect a short personal note within 48 hours with how to book a discovery call
+          when a seat opens.
         </AlertDescription>
       </Alert>
     );
@@ -115,6 +111,7 @@ export function WaitlistForm() {
             autoComplete="email"
             placeholder="you@example.com"
             aria-invalid={Boolean(errors.email)}
+            className="bg-white/70"
           />
         </Field>
         <Field label="Name" htmlFor="name" error={errors.name} required>
@@ -122,50 +119,52 @@ export function WaitlistForm() {
             id="name"
             name="name"
             autoComplete="name"
-            placeholder="Priya Sharma"
+            placeholder="Your name"
             aria-invalid={Boolean(errors.name)}
-          />
-        </Field>
-        <Field label="Current role" htmlFor="currentRole" error={errors.currentRole} required>
-          <Input
-            id="currentRole"
-            name="currentRole"
-            placeholder="Software Engineer at an IT services firm"
-            aria-invalid={Boolean(errors.currentRole)}
+            className="bg-white/70"
           />
         </Field>
         <Field
-          label="Years of experience"
-          htmlFor="yearsExperience"
-          error={errors.yearsExperience}
+          label="Primary goal"
+          htmlFor="primaryGoal"
+          error={errors.primaryGoal}
           required
+          className="sm:col-span-2"
         >
-          <Select value={yearsExperience} onValueChange={setYearsExperience}>
+          <Select value={primaryGoal} onValueChange={setPrimaryGoal}>
             <SelectTrigger
-              id="yearsExperience"
-              className="w-full"
-              aria-invalid={Boolean(errors.yearsExperience)}
+              id="primaryGoal"
+              className="w-full bg-white/70"
+              aria-invalid={Boolean(errors.primaryGoal)}
             >
-              <SelectValue placeholder="Select a range" />
+              <SelectValue placeholder="What is calling you most?" />
             </SelectTrigger>
             <SelectContent>
-              {yearsExperienceOptions.map((option) => (
+              {coachingGoalOptions.map((option) => (
                 <SelectItem key={option} value={option}>
-                  {experienceLabels[option]}
+                  {goalLabels[option]}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </Field>
-        <Field label="Target role" htmlFor="targetRole" error={errors.targetRole} hint="Optional">
+        <Field label="City" htmlFor="city" error={errors.city} hint="Optional">
           <Input
-            id="targetRole"
-            name="targetRole"
-            placeholder="Backend Engineer at a product company"
+            id="city"
+            name="city"
+            autoComplete="address-level2"
+            placeholder="Bengaluru"
+            className="bg-white/70"
           />
         </Field>
-        <Field label="City" htmlFor="city" error={errors.city} hint="Optional">
-          <Input id="city" name="city" autoComplete="address-level2" placeholder="Bengaluru" />
+        <Field label="Phone / WhatsApp" htmlFor="phone" error={errors.phone} hint="Optional">
+          <Input
+            id="phone"
+            name="phone"
+            autoComplete="tel"
+            placeholder="+91…"
+            className="bg-white/70"
+          />
         </Field>
       </div>
 
@@ -174,8 +173,8 @@ export function WaitlistForm() {
           <CheckCircle2 />
           <AlertTitle>This email is already on the waitlist.</AlertTitle>
           <AlertDescription>
-            No need to sign up again. If you have not heard from us within 24 hours,
-            reply to the confirmation email.
+            No need to sign up again. If you have not heard from us within 48 hours, reply
+            to the confirmation note.
           </AlertDescription>
         </Alert>
       ) : null}
@@ -188,10 +187,15 @@ export function WaitlistForm() {
       ) : null}
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs text-muted-foreground">
-          No spam. One email to collect your resume, then WhatsApp if you prefer.
+        <p className="text-xs text-[var(--ink-soft)]">
+          Soft follow-up only. Never sold. Never rushed.
         </p>
-        <Button type="submit" size="lg" disabled={pending} className="sm:w-auto">
+        <Button
+          type="submit"
+          size="lg"
+          disabled={pending}
+          className="rounded-md bg-[#3f5f4f] text-[#f7f3ed] hover:bg-[#345043] sm:w-auto"
+        >
           {pending ? <Loader2 className="animate-spin" data-icon="inline-start" /> : null}
           {pending ? "Saving" : "Join the waitlist"}
         </Button>
@@ -200,7 +204,6 @@ export function WaitlistForm() {
   );
 }
 
-/** Channel attribution for the GTM plan: ?utm_source=, ?source= or ?ref= on the landing URL. */
 function readSourceFromUrl(): string | undefined {
   if (typeof window === "undefined") return undefined;
   const params = new URLSearchParams(window.location.search);
@@ -215,6 +218,7 @@ function Field({
   hint,
   required,
   children,
+  className,
 }: {
   label: string;
   htmlFor: string;
@@ -222,15 +226,16 @@ function Field({
   hint?: string;
   required?: boolean;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
-    <div className="grid gap-2">
+    <div className={`grid gap-2 ${className ?? ""}`}>
       <div className="flex items-baseline justify-between">
         <Label htmlFor={htmlFor}>
           {label}
           {required ? <span className="text-destructive"> *</span> : null}
         </Label>
-        {hint ? <span className="text-xs text-muted-foreground">{hint}</span> : null}
+        {hint ? <span className="text-xs text-[var(--ink-soft)]">{hint}</span> : null}
       </div>
       {children}
       {error ? (

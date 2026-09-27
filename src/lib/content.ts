@@ -1,166 +1,191 @@
 export const site = {
-  name: "ShiftReady",
-  tagline: "Get interviews, not a template.",
+  name: "Prana Way",
+  tagline: "Come back to yourself, gently.",
   description:
-    "Resume, LinkedIn and interview prep for Indian professionals with 2-8 years of experience. Written with you on a call, formatted for Naukri and ATS, delivered in 3 days, backed by a 45-day call-back guarantee.",
+    "One-to-one coaching for people who want fitness, better habits, resilience, confidence, and the clarity to take their next step — without hustle culture.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:4821",
+};
+
+export const coachingGoals = [
+  {
+    id: "fitness",
+    title: "Get back to fitness",
+    body: "Rebuild a body rhythm you can keep — sleep, movement, and energy that feel like yours again.",
+  },
+  {
+    id: "habits",
+    title: "Get rid of bad habits",
+    body: "Replace the loops that drain you with small, kind practices that stick on ordinary days.",
+  },
+  {
+    id: "resilience",
+    title: "Build resilience",
+    body: "Steady your nervous system so stress, setbacks, and busy seasons stop knocking you off course.",
+  },
+  {
+    id: "confidence",
+    title: "Become the role model again",
+    body: "Regain the quiet confidence you used to carry — for yourself, and for the people who look to you.",
+  },
+  {
+    id: "clarity",
+    title: "Gain clarity and book your first client",
+    body: "Find your offer, your voice, and the courage to invite your first paying client.",
+  },
+] as const;
+
+export type CoachingGoalId = (typeof coachingGoals)[number]["id"];
+
+export const goalLabels: Record<CoachingGoalId, string> = {
+  fitness: "Get back to fitness",
+  habits: "Get rid of bad habits",
+  resilience: "Build resilience",
+  confidence: "Become the role model again",
+  clarity: "Gain clarity and book your first client",
 };
 
 export type Package = {
   id: string;
   name: string;
   price: number;
-  priceNote?: string;
-  turnaround: string;
+  duration: string;
   summary: string;
   includes: string[];
   highlight?: boolean;
+  goals: CoachingGoalId[];
 };
 
 export const packages: Package[] = [
   {
-    id: "resume",
-    name: "Resume Rewrite",
-    price: 2499,
-    turnaround: "3 working days",
-    summary: "For switchers whose applications go quiet after submit.",
+    id: "single-focus",
+    name: "Single Focus",
+    price: 4999,
+    duration: "3 weeks",
+    summary: "One goal. Clear weekly rhythm. Gentle accountability.",
+    goals: ["fitness", "habits", "resilience", "confidence", "clarity"],
     includes: [
-      "20-minute intake call to pull out the numbers you undersell",
-      "Full rewrite in a Naukri- and ATS-parseable format",
-      "Two file versions: clean .docx for portals, designed PDF for referrals",
-      "Two revision rounds",
-      "15-minute review call at delivery",
+      "Discovery call to choose your primary goal",
+      "Six coaching sessions over three weeks",
+      "A simple weekly practice plan",
+      "WhatsApp check-ins between sessions",
     ],
   },
   {
-    id: "resume-linkedin",
-    name: "Resume + LinkedIn",
-    price: 3999,
-    turnaround: "4 working days",
-    summary: "Most switchers choose this. Recruiters check both.",
-    highlight: true,
-    includes: [
-      "Everything in Resume Rewrite",
-      "LinkedIn headline, About section and experience bullets",
-      "Skills reordered to match your target job descriptions",
-      "Banner and photo brief",
-      "Naukri profile keyword and headline pass",
-    ],
-  },
-  {
-    id: "mock-interview",
-    name: "Mock Interview",
-    price: 1499,
-    turnaround: "Scheduled within 5 days",
-    summary: "One 60-minute round, run the way your target company runs it.",
-    includes: [
-      "Technical, managerial or HR round: you pick",
-      "Question bank for IT services, product startups or BFSI/consulting",
-      "Written scorecard within 24 hours",
-      "Five model answers for the questions you missed",
-    ],
-  },
-  {
-    id: "sprint",
-    name: "30-Day Job-Switch Sprint",
+    id: "steady-path",
+    name: "Steady Path",
     price: 9999,
-    turnaround: "30 days",
-    summary: "For a planned switch with a target list and a deadline.",
+    duration: "6 weeks",
+    summary: "The most chosen path — two or three goals woven into one habit of life.",
+    highlight: true,
+    goals: ["fitness", "habits", "resilience", "confidence"],
     includes: [
-      "Resume + LinkedIn package",
-      "Two mock interviews",
-      "Weekly 30-minute check-in for four weeks",
-      "Target-company list and application plan",
-      "CTC and notice-period negotiation script",
-      "WhatsApp support for 30 days",
+      "Everything in Single Focus",
+      "Twelve sessions over six weeks",
+      "Habit and energy tracking that stays light",
+      "A mid-path reset call with someone you trust",
+      "Personal role-model practices for hard days",
+    ],
+  },
+  {
+    id: "first-client",
+    name: "First Client",
+    price: 7999,
+    duration: "4 weeks",
+    summary: "For people ready to offer their gift and book their first paid client.",
+    goals: ["clarity", "confidence"],
+    includes: [
+      "Offer clarity and positioning in plain language",
+      "Eight coaching sessions",
+      "Script and soft-invite practice for outreach",
+      "Session structure for your first client call",
+      "Celebration and next-90-days sketch",
+    ],
+  },
+  {
+    id: "full-return",
+    name: "Full Return",
+    price: 17999,
+    duration: "12 weeks",
+    summary: "Fitness, habits, resilience, confidence, and clarity — held as one season of change.",
+    goals: ["fitness", "habits", "resilience", "confidence", "clarity"],
+    includes: [
+      "Twenty-four sessions across twelve weeks",
+      "All five goal tracks, paced to your life",
+      "Monthly body-and-mind review",
+      "Optional first-client sprint in weeks 9–12",
+      "Closing letter: who you are becoming",
     ],
   },
 ];
 
 export const steps = [
   {
-    title: "Send your current resume",
-    body: "Join the waitlist, then share your resume on WhatsApp. Within 24 hours you get a free ATS parse score and three specific fixes. No payment, no pitch deck.",
+    title: "Share where you are",
+    body: "Join the waitlist and tell us which goal is calling you. No long form. No pressure.",
   },
   {
-    title: "Intake call",
-    body: "Twenty minutes on Google Meet. We ask about the projects you do not think are impressive and find the numbers hiding in them.",
+    title: "A quiet discovery call",
+    body: "Thirty minutes to listen — what feels heavy, what you miss about yourself, and what “better” would feel like.",
   },
   {
-    title: "Draft in 48 hours",
-    body: "A rewrite built around your target role, checked against an ATS parser and a ten-point quality rubric before you see it.",
+    title: "A path that fits your life",
+    body: "We choose a package and a weekly rhythm you can keep even when work and family are full.",
   },
   {
-    title: "Review call and delivery",
-    body: "Two revision rounds, then a 15-minute call walking through what changed and why. You leave with a .docx, a PDF, and a one-page cheat sheet for 'walk me through your resume'.",
+    title: "Practice, reflect, return",
+    body: "Sessions, small practices, and check-ins that keep you moving without burning you out.",
   },
 ];
-
-export const guarantees = [
-  {
-    title: "45-day call-back guarantee",
-    body: "Apply to 15 or more roles with the new resume. No interview call-backs within 45 days and we rewrite it again free.",
-  },
-  {
-    title: "On time or 20% back",
-    body: "If the first draft is late against the promised turnaround, 20% is refunded automatically. You do not have to ask.",
-  },
-  {
-    title: "A human on every order",
-    body: "Every package includes at least two live calls. No chatbot rewrites, no template with your text pasted in.",
-  },
-];
-
-export const beforeAfter = {
-  role: "Software Engineer, 4 years, IT services to product",
-  before: [
-    "Responsible for developing and maintaining backend services for client projects.",
-    "Worked on performance improvements and bug fixes.",
-    "Coordinated with onsite team and participated in daily stand-ups.",
-  ],
-  after: [
-    "Owned the order-reconciliation service (Java, Spring Boot) for a US retail client processing 1.2M transactions a day.",
-    "Cut p95 latency from 840 ms to 210 ms by introducing Redis caching and batching DB writes; reduced client escalations from 6 to 0 a month.",
-    "Led a 3-engineer squad through two release cycles while the onsite lead was on leave; releases shipped on schedule with zero rollbacks.",
-  ],
-};
 
 export const faqs = [
   {
-    q: "ChatGPT can write a resume for free. Why pay?",
-    a: "It can write bullets. It cannot ask you the questions that surface your numbers, format for Naukri's parser, or tell you which of your five projects to lead with. Bring your ChatGPT draft to the free ATS score and see what it misses.",
+    q: "Is this therapy?",
+    a: "No. This is coaching for lifestyle, habits, confidence, and clarity. If clinical support is what you need, we will say so kindly and point you toward it.",
   },
   {
-    q: "Fiverr writers charge INR 800. What is different here?",
-    a: "You get an intake call, two revision rounds, a review call, two file formats and a 45-day call-back guarantee. Cheap writers give you a template with your text pasted in and no accountability.",
+    q: "How online or in-person is this?",
+    a: "Sessions are on Google Meet by default. In-person is possible in select cities when both of us can meet without strain.",
   },
   {
-    q: "Do you guarantee a job?",
-    a: "No one honest can. We guarantee interview call-backs within 45 days or a free rewrite, and on-time delivery or 20% back.",
+    q: "I have tried programs before and quit. Will this be different?",
+    a: "We design for ordinary weeks, not perfect ones. The plan bends when life does — that is the point.",
   },
   {
-    q: "I have an interview on Monday. Can you do it faster?",
-    a: "A 24-hour express option is available as an add-on when capacity allows. Mention it on WhatsApp when you send your resume.",
+    q: "Who is the First Client path for?",
+    a: "People who already have a skill or story to offer and want clarity, courage, and structure to invite their first paying client.",
   },
   {
-    q: "Who is this for, and who is it not for?",
-    a: "Professionals with roughly 2-8 years of experience in IT, product, fintech, BFSI, consulting or analytics who are switching jobs. Freshers and senior leaders need a different product; we will say so rather than sell you the wrong thing.",
-  },
-  {
-    q: "Do I have to share my current CTC?",
-    a: "No. The negotiation script works from market ranges for your role and city.",
-  },
-  {
-    q: "What happens to my resume and personal data?",
-    a: "Files are stored in a restricted folder and deleted 90 days after delivery unless you ask us to keep them. Writers only see anonymised intakes until you approve otherwise.",
+    q: "What happens after I join the waitlist?",
+    a: "You get a short personal note within 48 hours, then a link to book a discovery call when a seat opens.",
   },
 ];
 
-export const audience = [
-  "IT services engineers moving to product or a better services firm",
-  "Startup and product employees after a layoff",
-  "BFSI and consulting analysts moving up",
-  "Professionals returning to India or from a career break",
+/** Soft atmospheric slides for the home carousel — calm light, nature, human presence. */
+export const heroSlides = [
+  {
+    id: "dawn",
+    alt: "Soft morning light through trees",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2400&q=80",
+    caption: "Begin again in soft light",
+  },
+  {
+    id: "breath",
+    alt: "Calm shoreline at golden hour",
+    src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=80",
+    caption: "Let the rush fall away",
+  },
+  {
+    id: "path",
+    alt: "Quiet forest path with gentle mist",
+    src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2400&q=80",
+    caption: "Walk back toward yourself",
+  },
+  {
+    id: "warmth",
+    alt: "Warm sunlight on open fields",
+    src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=2400&q=80",
+    caption: "Steady, human, unhurried",
+  },
 ];
 
 export function formatInr(amount: number): string {

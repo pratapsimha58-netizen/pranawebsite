@@ -1,12 +1,5 @@
-import {
-  ArrowRight,
-  CheckCircle2,
-  Clock,
-  IndianRupee,
-  ShieldCheck,
-  UserRound,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { ArrowRight } from "lucide-react";
+import { HeroCarousel } from "@/components/hero-carousel";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -15,227 +8,165 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
-  audience,
-  beforeAfter,
+  coachingGoals,
   faqs,
   formatInr,
-  guarantees,
   packages,
   site,
   steps,
 } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
-function Section({
+export function Hero() {
+  return (
+    <section className="relative min-h-[100svh] w-full overflow-hidden">
+      <HeroCarousel />
+      <div className="relative z-10 flex min-h-[100svh] items-end">
+        <div className="mx-auto w-full max-w-6xl px-4 pb-28 pt-28 sm:px-6 sm:pb-32 sm:pt-32">
+          <p className="animate-fade-up font-display text-4xl text-[#f7f3ed] sm:text-5xl md:text-6xl lg:text-7xl">
+            {site.name}
+          </p>
+          <h1 className="animate-fade-up-delay-1 mt-4 max-w-2xl font-display text-2xl leading-snug text-[#f7f3ed]/95 text-balance sm:text-3xl md:text-4xl">
+            {site.tagline}
+          </h1>
+          <p className="animate-fade-up-delay-2 mt-5 max-w-lg text-base leading-relaxed text-[#f7f3ed]/80 sm:text-lg">
+            Coaching for fitness, habits, resilience, confidence, and the clarity to take your
+            next step — paced to a human life.
+          </p>
+          <div className="animate-fade-up-delay-3 mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button
+              asChild
+              className="h-11 rounded-md bg-[#f7f3ed] px-6 text-sm font-medium text-[#24302a] hover:bg-[#ebe4d8]"
+            >
+              <a href="#waitlist">
+                Join the waitlist
+                <ArrowRight data-icon="inline-end" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="h-11 rounded-md border-[#f7f3ed]/35 bg-transparent px-6 text-sm font-medium text-[#f7f3ed] hover:bg-[#f7f3ed]/10 hover:text-[#f7f3ed]"
+            >
+              <a href="#packages">See packages</a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SectionShell({
   id,
-  eyebrow,
   title,
   description,
   children,
   className,
 }: {
   id?: string;
-  eyebrow: string;
   title: string;
   description?: string;
   children: React.ReactNode;
   className?: string;
 }) {
   return (
-    <section id={id} className={cn("scroll-mt-20 py-16 sm:py-24", className)}>
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6">
+    <section id={id} className={cn("scroll-mt-24 py-20 sm:py-28", className)}>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="max-w-2xl">
-          <p className="text-[12px] font-semibold tracking-[1.5px] text-primary uppercase">
-            {eyebrow}
-          </p>
-          <h2 className="mt-3 text-[32px] font-bold tracking-[-1px] text-white sm:text-[40px] sm:tracking-[-1.5px]">
+          <h2 className="font-display text-3xl leading-tight text-[#24302a] text-balance sm:text-4xl md:text-5xl">
             {title}
           </h2>
           {description ? (
-            <p className="mt-4 text-[16px] leading-[1.55] text-[#cccccc]">{description}</p>
+            <p className="mt-4 text-base leading-relaxed text-[var(--ink-soft)] sm:text-lg">
+              {description}
+            </p>
           ) : null}
         </div>
-        <div className="mt-10">{children}</div>
+        <div className="mt-12">{children}</div>
       </div>
     </section>
   );
 }
 
-export function Hero() {
+export function Goals() {
   return (
-    <section className="border-b border-[#2a2a2a]">
-      <div className="mx-auto grid max-w-[1280px] gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-16">
-        <div>
-          <Badge className="mb-5 rounded-full border-0 bg-primary px-3 py-1 text-[12px] font-semibold tracking-[1.5px] text-primary-foreground uppercase">
-            Get started
-          </Badge>
-          <h1 className="text-[40px] font-bold leading-[1.1] tracking-[-1.5px] text-white sm:text-[56px] sm:tracking-[-2px] lg:text-[64px] lg:leading-[1.05] lg:tracking-[-2.5px]">
-            {site.tagline}
-          </h1>
-          <p className="mt-6 max-w-xl text-[16px] leading-[1.55] text-[#cccccc] sm:text-[18px]">
-            {site.description}
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button asChild className="h-10 rounded-md px-5 text-[14px] font-semibold">
-              <a href="#waitlist">
-                Get a free ATS score
-                <ArrowRight data-icon="inline-end" />
-              </a>
-            </Button>
-            <Button
-              asChild
-              variant="secondary"
-              className="h-10 rounded-md border border-[#2a2a2a] bg-[#1a1a1a] px-5 text-[14px] font-semibold text-white hover:bg-[#242424]"
-            >
-              <a href="#packages">See packages and pricing</a>
-            </Button>
-          </div>
-          <dl className="mt-12 grid grid-cols-3 gap-6">
-            <div>
-              <dt className="flex items-center gap-1.5 text-[13px] font-medium text-[#888888]">
-                <Clock className="size-3.5" /> Turnaround
-              </dt>
-              <dd className="mt-1 text-[28px] font-bold tracking-[-1px] text-primary sm:text-[36px]">
-                3d
-              </dd>
-            </div>
-            <div>
-              <dt className="flex items-center gap-1.5 text-[13px] font-medium text-[#888888]">
-                <IndianRupee className="size-3.5" /> From
-              </dt>
-              <dd className="mt-1 text-[28px] font-bold tracking-[-1px] text-primary sm:text-[36px]">
-                {formatInr(2499)}
-              </dd>
-            </div>
-            <div>
-              <dt className="flex items-center gap-1.5 text-[13px] font-medium text-[#888888]">
-                <ShieldCheck className="size-3.5" /> Guarantee
-              </dt>
-              <dd className="mt-1 text-[28px] font-bold tracking-[-1px] text-primary sm:text-[36px]">
-                45d
-              </dd>
-            </div>
-          </dl>
-        </div>
-
-        <div className="rounded-xl border border-[#2a2a2a] bg-[#1a1a1a] p-6 sm:p-8">
-          <p className="text-[12px] font-semibold tracking-[1.5px] text-[#888888] uppercase">
-            Built for
-          </p>
-          <h2 className="mt-2 text-[18px] font-semibold text-white">
-            Job switchers, not job seekers in general
-          </h2>
-          <ul className="mt-6 space-y-3.5 text-[14px] leading-[1.55] text-[#cccccc]">
-            {audience.map((item) => (
-              <li key={item} className="flex gap-2.5">
-                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 border-t border-[#2a2a2a] pt-5 text-[13px] text-[#888888]">
-            Freshers and senior leaders need a different product. We will tell you rather
-            than sell you the wrong thing.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function HowItWorks() {
-  return (
-    <Section
-      id="how-it-works"
-      eyebrow="How it works"
-      title="Four steps, two calls, three working days"
-      description="The process is the product. Every step exists because it changes what a recruiter sees."
-      className="bg-[#121212]"
+    <SectionShell
+      id="goals"
+      title="Five ways people find their way back"
+      description="Choose the one that feels most true right now. We can braid others in later."
     >
-      <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {steps.map((step, index) => (
-          <li
-            key={step.title}
-            className="rounded-xl border border-[#2a2a2a] bg-[#1a1a1a] p-6 sm:p-8"
-          >
-            <span className="flex size-8 items-center justify-center rounded-md bg-primary text-[14px] font-bold text-primary-foreground">
-              {index + 1}
+      <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {coachingGoals.map((goal, index) => (
+          <li key={goal.id} className="border-t border-[#d7d0c4] pt-5">
+            <span className="text-xs tracking-[0.18em] text-[var(--ink-soft)] uppercase">
+              {String(index + 1).padStart(2, "0")}
             </span>
-            <h3 className="mt-5 text-[16px] font-semibold text-white">{step.title}</h3>
-            <p className="mt-2 text-[14px] leading-[1.55] text-[#cccccc]">{step.body}</p>
+            <h3 className="mt-3 font-display text-2xl text-[#24302a]">{goal.title}</h3>
+            <p className="mt-3 text-[15px] leading-relaxed text-[var(--ink-soft)]">{goal.body}</p>
           </li>
         ))}
       </ol>
-    </Section>
+    </SectionShell>
   );
 }
 
 export function Packages() {
   return (
-    <Section
+    <SectionShell
       id="packages"
-      eyebrow="Packages and pricing"
-      title="Fixed price, fixed turnaround, no subscription"
-      description="Pay once per switch. Most people choose Resume + LinkedIn; the sprint is for a planned move with a deadline."
+      title="Packages with clear prices and a gentle pace"
+      description="Pay once for a season of support. No subscriptions. No hustle scoreboard."
+      className="bg-[color-mix(in_srgb,var(--mist)_70%,transparent)]"
     >
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-6 lg:grid-cols-2">
         {packages.map((pkg) => (
-          <div
+          <article
             key={pkg.id}
             className={cn(
-              "flex flex-col rounded-xl p-6 sm:p-8",
+              "flex flex-col rounded-2xl border p-7 sm:p-8",
               pkg.highlight
-                ? "bg-primary text-primary-foreground"
-                : "border border-[#2a2a2a] bg-[#1a1a1a] text-white",
+                ? "border-[#3f5f4f]/35 bg-[#3f5f4f] text-[#f7f3ed]"
+                : "border-[#d7d0c4] bg-[#faf7f2]/80 text-[#24302a]",
             )}
           >
-            <div className="flex items-center justify-between gap-2">
-              <h3 className="text-[18px] font-semibold">{pkg.name}</h3>
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="font-display text-2xl sm:text-3xl">{pkg.name}</h3>
               {pkg.highlight ? (
-                <span className="rounded-full bg-[#0a0a0a] px-2.5 py-0.5 text-[12px] font-semibold tracking-[1px] text-primary uppercase">
+                <span className="text-xs tracking-[0.14em] text-[#f7f3ed]/75 uppercase">
                   Most chosen
                 </span>
               ) : null}
             </div>
             <p
               className={cn(
-                "mt-2 text-[14px] leading-[1.55]",
-                pkg.highlight ? "text-[#0a0a0a]/80" : "text-[#cccccc]",
+                "mt-3 text-[15px] leading-relaxed",
+                pkg.highlight ? "text-[#f7f3ed]/80" : "text-[var(--ink-soft)]",
               )}
             >
               {pkg.summary}
             </p>
-            <p className="mt-5">
-              <span className="text-[32px] font-bold tracking-[-1px]">
-                {formatInr(pkg.price)}
-              </span>
+            <p className="mt-6 font-display text-3xl">
+              {formatInr(pkg.price)}
               <span
                 className={cn(
-                  "ml-1 text-[13px]",
-                  pkg.highlight ? "text-[#0a0a0a]/70" : "text-[#888888]",
+                  "ml-2 text-sm font-sans",
+                  pkg.highlight ? "text-[#f7f3ed]/70" : "text-[var(--ink-soft)]",
                 )}
               >
-                one-time
+                · {pkg.duration}
               </span>
             </p>
-            <p
-              className={cn(
-                "mt-1 flex items-center gap-1.5 text-[13px]",
-                pkg.highlight ? "text-[#0a0a0a]/70" : "text-[#888888]",
-              )}
-            >
-              <Clock className="size-3.5" /> {pkg.turnaround}
-            </p>
-            <ul className="mt-6 flex-1 space-y-2.5 text-[14px]">
+            <ul className="mt-6 flex-1 space-y-2.5 text-[15px]">
               {pkg.includes.map((line) => (
-                <li key={line} className="flex gap-2">
-                  <CheckCircle2
+                <li key={line} className="flex gap-2.5">
+                  <span
                     className={cn(
-                      "mt-0.5 size-4 shrink-0",
-                      pkg.highlight ? "text-[#0a0a0a]" : "text-primary",
+                      "mt-2 size-1.5 shrink-0 rounded-full",
+                      pkg.highlight ? "bg-[#f7f3ed]/80" : "bg-[#3f5f4f]",
                     )}
                   />
-                  <span className={pkg.highlight ? "text-[#0a0a0a]" : "text-[#cccccc]"}>
+                  <span className={pkg.highlight ? "text-[#f7f3ed]/90" : "text-[#24302a]/85"}>
                     {line}
                   </span>
                 </li>
@@ -244,127 +175,76 @@ export function Packages() {
             <Button
               asChild
               className={cn(
-                "mt-8 h-10 w-full rounded-md text-[14px] font-semibold",
+                "mt-8 h-11 w-full rounded-md text-sm font-medium",
                 pkg.highlight
-                  ? "bg-[#0a0a0a] text-white hover:bg-[#1a1a1a]"
-                  : "bg-primary text-primary-foreground hover:bg-[#e6eb52]",
+                  ? "bg-[#f7f3ed] text-[#24302a] hover:bg-[#ebe4d8]"
+                  : "bg-[#3f5f4f] text-[#f7f3ed] hover:bg-[#345043]",
               )}
             >
-              <a href="#waitlist">Join the waitlist</a>
+              <a href="#waitlist">Start with this path</a>
             </Button>
-          </div>
+          </article>
         ))}
       </div>
-      <p className="mt-6 text-[13px] text-[#888888]">
-        Add-ons from {formatInr(499)}: cover letter, Naukri profile optimisation, extra
-        revision round, 24-hour express, salary negotiation call.
-      </p>
-    </Section>
+    </SectionShell>
   );
 }
 
-export function BeforeAfter() {
+export function HowItWorks() {
   return (
-    <Section
-      id="sample"
-      eyebrow="Before and after"
-      title="Same engineer, same job. Different resume."
-      description={`${beforeAfter.role}. Names and client details changed with permission.`}
-      className="bg-[#121212]"
+    <SectionShell
+      id="how-it-works"
+      title="How we walk together"
+      description="No overwhelm. Four soft steps from where you are to a rhythm you can keep."
     >
-      <div className="grid gap-4 lg:grid-cols-2">
-        <div className="rounded-xl border border-[#2a2a2a] border-dashed bg-[#1a1a1a] p-6 sm:p-8">
-          <span className="rounded-full bg-[#242424] px-3 py-1 text-[13px] font-medium text-[#888888]">
-            Before
-          </span>
-          <p className="mt-4 text-[16px] font-semibold text-[#888888]">
-            Duties, no numbers, no ownership
-          </p>
-          <ul className="mt-5 space-y-3 font-mono text-[13px] leading-[1.55] text-[#888888]">
-            {beforeAfter.before.map((line) => (
-              <li key={line} className="flex gap-2">
-                <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-[#5a5a5a]" />
-                {line}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="rounded-xl border border-[#2a2a2a] bg-[#1a1a1a] p-6 sm:p-8">
-          <span className="rounded-full bg-primary px-3 py-1 text-[12px] font-semibold tracking-[1.5px] text-primary-foreground uppercase">
-            After
-          </span>
-          <p className="mt-4 text-[16px] font-semibold text-white">
-            Scope, action, measurable result
-          </p>
-          <ul className="mt-5 space-y-3 font-mono text-[13px] leading-[1.55] text-[#e6e6e6]">
-            {beforeAfter.after.map((line) => (
-              <li key={line} className="flex gap-2">
-                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
-                {line}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-export function Guarantees() {
-  return (
-    <Section
-      eyebrow="Guarantees"
-      title="Small promises we can keep every time"
-      description="We do not promise you a job. We promise the things that are in our control."
-    >
-      <div className="grid gap-4 md:grid-cols-3">
-        {guarantees.map((item, index) => {
-          const Icon = [ShieldCheck, Clock, UserRound][index] ?? ShieldCheck;
-          return (
-            <div
-              key={item.title}
-              className="rounded-xl border border-[#2a2a2a] bg-[#1a1a1a] p-6 sm:p-8"
-            >
-              <Icon className="size-6 text-primary" />
-              <h3 className="mt-4 text-[16px] font-semibold text-white">{item.title}</h3>
-              <p className="mt-2 text-[14px] leading-[1.55] text-[#cccccc]">{item.body}</p>
-            </div>
-          );
-        })}
-      </div>
-    </Section>
+      <ol className="grid gap-10 md:grid-cols-2">
+        {steps.map((step, index) => (
+          <li key={step.title} className="relative pl-14">
+            <span className="absolute top-0 left-0 font-display text-4xl text-[#3f5f4f]/35">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3 className="font-display text-2xl text-[#24302a]">{step.title}</h3>
+            <p className="mt-3 text-[15px] leading-relaxed text-[var(--ink-soft)]">{step.body}</p>
+          </li>
+        ))}
+      </ol>
+    </SectionShell>
   );
 }
 
 export function Faq() {
   return (
-    <Section id="faq" eyebrow="FAQ" title="Questions people ask before paying" className="bg-[#121212]">
+    <SectionShell
+      id="faq"
+      title="Questions people ask before beginning"
+      className="bg-[color-mix(in_srgb,var(--mist)_55%,transparent)]"
+    >
       <Accordion type="single" collapsible className="max-w-3xl">
         {faqs.map((item, index) => (
-          <AccordionItem key={item.q} value={`item-${index}`} className="border-[#2a2a2a]">
-            <AccordionTrigger className="text-left text-[16px] font-semibold text-white hover:no-underline">
+          <AccordionItem key={item.q} value={`item-${index}`} className="border-[#d7d0c4]">
+            <AccordionTrigger className="text-left font-display text-lg text-[#24302a] hover:no-underline sm:text-xl">
               {item.q}
             </AccordionTrigger>
-            <AccordionContent className="text-[14px] leading-[1.55] text-[#cccccc]">
+            <AccordionContent className="text-[15px] leading-relaxed text-[var(--ink-soft)]">
               {item.a}
             </AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>
-    </Section>
+    </SectionShell>
   );
 }
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[#2a2a2a] bg-[#0a0a0a] py-16">
-      <div className="mx-auto flex max-w-[1280px] flex-col gap-4 px-4 text-[14px] text-[#888888] sm:flex-row sm:items-center sm:justify-between sm:px-6">
+    <footer className="border-t border-[#d7d0c4] py-14">
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 text-sm text-[var(--ink-soft)] sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <p>
-          <span className="font-semibold text-white">{site.name}</span>
+          <span className="font-display text-lg text-[#24302a]">{site.name}</span>
           {" · "}
-          Resume, LinkedIn and interview prep for job switchers in India.
+          Coaching that is soothing to the eyes and the heart.
         </p>
-        <p>Waitlist only for now. First 10 customers get founding-customer pricing.</p>
+        <p>Waitlist open. Discovery calls as seats free up.</p>
       </div>
     </footer>
   );
