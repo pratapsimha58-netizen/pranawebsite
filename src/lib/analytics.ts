@@ -1,16 +1,29 @@
 /**
- * Privacy-friendly analytics helpers.
- * Default site choice: Netlify Analytics (enable in the Netlify dashboard).
- * Override with NEXT_PUBLIC_ANALYTICS_PROVIDER=plausible|ga4 plus the matching public IDs.
+ * Analytics helpers. Default: GA4 (see site.analytics).
+ * Override with NEXT_PUBLIC_ANALYTICS_PROVIDER=plausible|ga4|netlify.
  */
+
+import { site } from "@/lib/site";
 
 export type AnalyticsProvider = "none" | "plausible" | "ga4" | "netlify";
 
 export function getAnalyticsProvider(): AnalyticsProvider {
   const raw = process.env.NEXT_PUBLIC_ANALYTICS_PROVIDER?.toLowerCase();
   if (raw === "plausible" || raw === "ga4" || raw === "netlify") return raw;
-  // Site default when no env override is set
-  return "netlify";
+  if (site.analytics.provider === "ga4" || site.analytics.provider === "netlify") {
+    return site.analytics.provider;
+  }
+  return "none";
+}
+
+export function getGa4Id(): string | undefined {
+  const fromEnv = process.env.NEXT_PUBLIC_GA4_ID;
+  if (fromEnv && !fromEnv.startsWith("{{") && !fromEnv.startsWith("G-TODO")) {
+    return fromEnv;
+  }
+  const fromSite = site.analytics.ga4Id;
+  if (fromSite && fromSite.startsWith("G-")) return fromSite;
+  return undefined;
 }
 
 declare global {
@@ -39,8 +52,6 @@ export function trackWaitlistSubmit(primaryGoal: string) {
     return;
   }
 
-  // Netlify Analytics does not support custom events in the free snippet;
-  // goal is still stored server-side on the waitlist row.
   if (process.env.NODE_ENV === "development") {
     console.info("[analytics] waitlist_submit", { primaryGoal, provider });
   }
