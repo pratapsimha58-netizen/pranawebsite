@@ -22,8 +22,7 @@ export const site = {
   social: {
     /** {{TODO: LinkedIn profile URL}} */
     linkedin: "{{TODO}}",
-    /** {{TODO: Instagram URL, e.g. https://instagram.com/coachpratapsimha}} */
-    instagram: "{{TODO}}",
+    instagram: "https://www.instagram.com/coachpratapsimha",
     /** {{TODO: YouTube channel URL}} */
     youtube: "{{TODO}}",
   },
@@ -38,8 +37,11 @@ export const site = {
     google: "{{TODO: verification code}}",
   },
   analytics: {
-    /** {{TODO: which analytics — Netlify Analytics, Plausible, or GA4}} */
-    provider: "{{TODO: which one}}",
+    /**
+     * Active choice: Netlify Analytics (enable in Netlify UI → Site → Analytics).
+     * For Plausible/GA4 instead, set NEXT_PUBLIC_ANALYTICS_PROVIDER + IDs in Netlify env.
+     */
+    provider: "netlify",
   },
 } as const;
 

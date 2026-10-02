@@ -9,13 +9,11 @@ export function AboutCoach() {
       <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <div>
           <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden border border-[#d7d0c4] bg-[#e7efe9]">
-            {/* {{TODO: owner to supply public/images/pratap.jpg and swap this placeholder}} */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-sm text-[var(--ink-soft)]">
-              <span className="font-display text-2xl text-[#24302a]">{site.person.name}</span>
-              <span className="mt-2 text-xs leading-relaxed">
-                Photo placeholder
-                <br />
-                {"{{TODO: owner to supply public/images/pratap.jpg}}"}
+            {/* Photo optional until a real headshot exists at public/images/pratap.jpg */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-[radial-gradient(ellipse_at_30%_20%,#f7f3ed_0%,#e7efe9_55%,#d5e0d8_100%)] p-6 text-center">
+              <span className="font-display text-3xl text-[#24302a]">{site.person.name}</span>
+              <span className="mt-2 text-xs tracking-[0.14em] text-[var(--ink-soft)] uppercase">
+                {site.person.jobTitle}
               </span>
             </div>
           </div>

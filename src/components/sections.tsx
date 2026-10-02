@@ -293,6 +293,18 @@ export function SiteFooter() {
               {site.tagline} One-to-one coaching in {site.city} and online with{" "}
               {site.person.name}.
             </p>
+            {!site.social.instagram.startsWith("{{") ? (
+              <p className="mt-3 text-sm">
+                <a
+                  href={site.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#3f5f4f] underline-offset-4 hover:underline"
+                >
+                  Instagram @coachpratapsimha
+                </a>
+              </p>
+            ) : null}
           </div>
           <div>
             <p className="text-xs tracking-[0.14em] text-[var(--ink-soft)] uppercase">

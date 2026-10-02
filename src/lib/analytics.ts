@@ -1,8 +1,7 @@
 /**
  * Privacy-friendly analytics helpers.
- * {{TODO: which analytics — Netlify Analytics, Plausible, or GA4}}
- * Until a provider is chosen, events are no-ops in production unless
- * NEXT_PUBLIC_ANALYTICS_PROVIDER is set.
+ * Default site choice: Netlify Analytics (enable in the Netlify dashboard).
+ * Override with NEXT_PUBLIC_ANALYTICS_PROVIDER=plausible|ga4 plus the matching public IDs.
  */
 
 export type AnalyticsProvider = "none" | "plausible" | "ga4" | "netlify";
@@ -10,7 +9,8 @@ export type AnalyticsProvider = "none" | "plausible" | "ga4" | "netlify";
 export function getAnalyticsProvider(): AnalyticsProvider {
   const raw = process.env.NEXT_PUBLIC_ANALYTICS_PROVIDER?.toLowerCase();
   if (raw === "plausible" || raw === "ga4" || raw === "netlify") return raw;
-  return "none";
+  // Site default when no env override is set
+  return "netlify";
 }
 
 declare global {
