@@ -1,10 +1,8 @@
 import Script from "next/script";
-import { getAnalyticsProvider } from "@/lib/analytics";
+import { getAnalyticsProvider, getGa4Id } from "@/lib/analytics";
 
 /**
- * Loads the chosen analytics snippet when configured.
- * Set NEXT_PUBLIC_ANALYTICS_PROVIDER to plausible | ga4 | netlify
- * and the matching public IDs below.
+ * Loads the site analytics snippet (GA4 by default).
  */
 export function Analytics() {
   const provider = getAnalyticsProvider();
@@ -23,8 +21,8 @@ export function Analytics() {
   }
 
   if (provider === "ga4") {
-    const id = process.env.NEXT_PUBLIC_GA4_ID;
-    if (!id || id.startsWith("{{") || id.startsWith("G-TODO")) return null;
+    const id = getGa4Id();
+    if (!id) return null;
     return (
       <>
         <Script

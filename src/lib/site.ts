@@ -37,11 +37,10 @@ export const site = {
     google: "{{TODO: verification code}}",
   },
   analytics: {
-    /**
-     * Active choice: Netlify Analytics (enable in Netlify UI → Site → Analytics).
-     * For Plausible/GA4 instead, set NEXT_PUBLIC_ANALYTICS_PROVIDER + IDs in Netlify env.
-     */
-    provider: "netlify",
+    /** Active: Google Analytics 4. Override with NEXT_PUBLIC_ANALYTICS_PROVIDER if needed. */
+    provider: "ga4",
+    /** Public GA4 measurement ID (safe in the browser). */
+    ga4Id: "G-059YRF6D8J",
   },
 } as const;
 
